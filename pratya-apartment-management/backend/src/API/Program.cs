@@ -19,6 +19,11 @@ builder.Services.AddScoped<
     TenantRepository
 >();
 
+builder.Services.AddScoped<
+    IRoomRepository,
+    RoomRepository
+>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
