@@ -1,0 +1,16 @@
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\bin\Debug\net10.0\Application.deps.json
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\bin\Debug\net10.0\Application.dll
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\bin\Debug\net10.0\Application.pdb
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\bin\Debug\net10.0\Domain.dll
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\bin\Debug\net10.0\Domain.pdb
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.csproj.AssemblyReference.cache
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.AssemblyInfoInputs.cache
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.AssemblyInfo.cs
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.csproj.CoreCompileInputs.cache
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.sourcelink.json
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Applicat.44B5EDA2.Up2Date
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.dll
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\refint\Application.dll
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\Application.pdb
+D:\pratya-apartment\pratya-apartment-management\backend\src\Application\obj\Debug\net10.0\ref\Application.dll
