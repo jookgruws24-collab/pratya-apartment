@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513041927_AddBillStatus")]
+    partial class AddBillStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,56 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Bill", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("BillStatusId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("BillingMonth")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal>("CommonFeeAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal>("ElectricAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("LateFeeAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("RentAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<Guid>("RoomId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("WaterAmount")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BillStatusId");
-
-                    b.HasIndex("RoomId");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("Bills");
-                });
 
             modelBuilder.Entity("Domain.Entities.BillStatus", b =>
                 {
@@ -153,33 +106,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Bill", b =>
-                {
-                    b.HasOne("Domain.Entities.BillStatus", "BillStatus")
-                        .WithMany()
-                        .HasForeignKey("BillStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BillStatus");
-
-                    b.Navigation("Room");
-
-                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("Domain.Entities.Room", b =>

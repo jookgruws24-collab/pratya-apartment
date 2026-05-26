@@ -16,4 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Room> Rooms => Set<Room>();
 
     public DbSet<RoomStatus> RoomStatuses => Set<RoomStatus>();
+
+    public DbSet<BillStatus> BillStatuses => Set<BillStatus>();
+    public DbSet<Bill> Bills => Set<Bill>();
 }
