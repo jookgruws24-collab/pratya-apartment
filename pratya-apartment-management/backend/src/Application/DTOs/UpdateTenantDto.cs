@@ -1,14 +1,15 @@
-namespace Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
-public class Tenant
+namespace Application.DTOs;
+
+public class UpdateTenantDto
 {
-    public Guid Id { get; set; }
-
+    [Required]
     public string FirstName { get; set; } = string.Empty;
 
+    [Required]
     public string LastName { get; set; } = string.Empty;
 
+    [Required]
     public string RoomNumber { get; set; } = string.Empty;
-
-    public bool IsDeleted { get; set; } = false;
 }

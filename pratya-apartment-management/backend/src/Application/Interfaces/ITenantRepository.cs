@@ -7,4 +7,6 @@ public interface ITenantRepository
     Task<List<Tenant>> GetAllAsync();
 
     Task AddAsync(Tenant tenant);
+
+    Task UpdateAsync(Tenant tenant);
 }
