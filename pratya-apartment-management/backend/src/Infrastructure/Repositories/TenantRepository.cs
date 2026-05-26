@@ -17,7 +17,6 @@ public class TenantRepository : ITenantRepository
     public async Task<List<Tenant>> GetAllAsync()
     {
         return await _context.Tenants
-            .Where(t => !t.IsDeleted)
             .ToListAsync();
     }
 

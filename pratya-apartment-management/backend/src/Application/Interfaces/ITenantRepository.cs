@@ -9,4 +9,6 @@ public interface ITenantRepository
     Task AddAsync(Tenant tenant);
 
     Task UpdateAsync(Tenant tenant);
+
+    Task DeleteAsync(Guid id);
 }
