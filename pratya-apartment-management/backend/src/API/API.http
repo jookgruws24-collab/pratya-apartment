@@ -1,6 +1,47 @@
 @API_HostAddress = http://localhost:5034
 
-GET {{API_HostAddress}}/weatherforecast/
-Accept: application/json
+### 1) สมัครสมาชิก
+POST {{API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password123"
+}
+
+### 2) เข้าสู่ระบบ (คัดลอก token จาก response มาใส่ตัวแปร @token ด้านล่าง)
+POST {{API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password123"
+}
+
+### วางค่า token ที่ได้จากข้อ 2 ตรงนี้
+@token = ใส่token
+
+### 3) ดูรายการผู้เช่า (ต้องแนบ token)
+GET {{API_HostAddress}}/api/tenant
+Authorization: Bearer {{token}}
+
+### 4) เพิ่มผู้เช่า
+POST {{API_HostAddress}}/api/tenant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "firstName": "สมชาย",
+  "lastName": "ใจดี",
+  "roomNumber": "101"
+}
+
+### 5) ข้อมูลสรุปหน้า Dashboard
+GET {{API_HostAddress}}/api/dashboard/summary
+Authorization: Bearer {{token}}
+
+### 6) ดาวน์โหลดรายงานบิลเป็น PDF
+GET {{API_HostAddress}}/api/report/bills/pdf
+Authorization: Bearer {{token}}
 
 ###

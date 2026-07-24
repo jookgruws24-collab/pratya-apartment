@@ -1,0 +1,55 @@
+# รันทั้งระบบ (ฐานข้อมูล + backend + frontend) ด้วยคำสั่งเดียว:
+#   docker compose up --build
+#
+# เปิดใช้งาน:
+#   - เว็บ (frontend):     http://localhost:3000
+#   - API + Swagger:       http://localhost:5034/swagger
+#
+# ค่าลับต่าง ๆ อ่านจากไฟล์ .env (ดูตัวอย่างใน .env.example)
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-apartment_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # รอจนฐานข้อมูลพร้อมก่อน backend จะเริ่ม
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # ชื่อ host คือ "db" (ชื่อ service ด้านบน) ไม่ใช่ localhost
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=${POSTGRES_DB:-apartment_db};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-postgres}"
+      Jwt__Secret: ${JWT_SECRET:-CHANGE_ME_dev_only_secret_key_at_least_32_characters_long}
+      Jwt__Issuer: PratyaApartment
+      Jwt__Audience: PratyaApartmentUsers
+      Storage__Provider: Local
+    ports:
+      - "5034:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # ที่อยู่ที่ "เบราว์เซอร์" ใช้เรียก API (พอร์ตที่ backend เปิดออกมา)
+        VITE_API_BASE_URL: http://localhost:5034
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  pgdata:

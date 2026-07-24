@@ -87,6 +87,23 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BillStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Unpaid"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Paid"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Overdue"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Room", b =>
@@ -130,6 +147,23 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RoomStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Available"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Occupied"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Maintenance"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Tenant", b =>
@@ -156,6 +190,60 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UploadedFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("SizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UploadedFiles");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Domain.Entities.Bill", b =>

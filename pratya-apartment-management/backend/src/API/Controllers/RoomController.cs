@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Application.DTOs;
 
@@ -7,6 +8,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class RoomController : ControllerBase
 {
     private readonly IRoomRepository _roomRepository;

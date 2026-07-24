@@ -1,4 +1,14 @@
+# dependencies / build output
 node_modules/
 dist/
 build/
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+
+# ไฟล์ที่ผู้ใช้อัปโหลด (เก็บเฉพาะตอนรัน ไม่ต้อง commit)
+backend/src/API/wwwroot/uploads/
+
+# ความลับ ห้าม commit
 .env

@@ -1,12 +1,14 @@
 using Application.DTOs;
 using Application.Interfaces;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class TenantController : ControllerBase
 {
     private readonly ITenantRepository _tenantRepository;
